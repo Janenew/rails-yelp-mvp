@@ -1,0 +1,18 @@
+<h1>Restaurants</h1>
+
+<div class="row">
+  <% @restaurants.each do |restaurant| %>
+    <div class="col-xs-12 col-sm-6 col-md-3">
+      <h2> <%= link_to restaurant.name, restaurant_path(restaurant) %> </h2>
+
+      <p> <%= image_tag "tag.png", style: 'height:25px;width:auto;' %> Category : <%= restaurant.category.capitalize %> </p>
+
+      <p>  <%= image_tag "address.png", style: 'height:25px;width:auto;' %> Address : <%= restaurant.address %> </p>
+
+      <p> <span class="glyphicon glyphicon-earphone"></span> <%= restaurant.phone %> </p>
+    </div>
+  <% end %>
+
+</div>
+
+    <%= link_to "Add a restaurant", new_restaurant_path, class: "btn btn-primary" %>

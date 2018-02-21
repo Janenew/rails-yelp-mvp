@@ -1,0 +1,53 @@
+
+
+
+<div class="container">
+  <div class="jumbotron">
+    <h1> Restaurant : <%= @restaurant.name %></h1>
+  </div>
+  <div >
+    <p> <%= image_tag "address.png", style: 'height:25px;width:auto;' %> Address : <%= @restaurant.address %> </p>
+    <p><span class="glyphicon glyphicon-earphone"></span> <%= @restaurant.phone %></p>
+    <p><%= image_tag "tag.png", style: 'height:25px;width:auto;' %> Category : <%= @restaurant.category %></p>
+  </div>
+</div>
+
+<div class="panel panel-info">
+  <div class="panel-heading">Add a new review for <%= @restaurant.name %></div>
+  <div class="panel-body">
+    <%= simple_form_for [@restaurant, @review] do |form| %>
+      <%= form.input :content %>
+      <%= form.input :rating,
+                    label: false,
+                    as: :radio_buttons,
+                    item_label_class: "radio-inline",
+                    item_wrapper_tag: false,
+                    collection: Review::RATINGS,
+                    item_wrapper_class: 'inline'
+                    %>
+      <%= form.button :submit, class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
+
+
+<h3> Reviews list</h3>
+
+<% @restaurant.reviews.each do |review| %>
+
+  <!-- Left-aligned -->
+  <div class="media">
+    <div class="media-left">
+      <%= image_tag "profile.png", class: "media-object", style: 'height:auto;width:60px;' %>
+    </div>
+    <div class="media-body">
+      <h4 class="media-heading"> Anonymous review </h4>
+      <p> <%=  review.content %></p>
+      <p> Rating : <%=  review.rating %></p>
+    </div>
+  </div>
+<% end %>
+
+
+
+
